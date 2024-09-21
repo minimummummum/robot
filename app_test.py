@@ -20,7 +20,7 @@ receive_socket_port = 8081
 send_socket_port = 8082
 flask_port = 5000
 global_send = None
-servo_state = [0,0,0,0,0,0,0,0] # 오른어깨 왼어깨 오른손 왼손 오른다리 왼다리 오른발 왼발
+servo_state = [-90,-90,45,45,-5,0,0,0,0] # 오른어깨 왼어깨 오른손 왼손 오른다리 왼다리 오른발 왼발
 servo_default = [-90,-90,45,45,-5,0,0,0,0]
 send_lock = threading.Lock()
 receive_lock = threading.Lock()
@@ -68,7 +68,39 @@ def image_socket_server():
                     sw = 0
         client_socket.close()
 
-# 텍스트 데이터를 받는 소켓 서버 함수
+# 센서 데이터를 받는 소켓 서버 함수 @@@off해놓음
+# def receive_socket_server():
+#     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#     server_socket.bind((host, receive_socket_port))
+#     server_socket.listen(1)
+#     global receive_sensor
+#     received_data = b''
+#     while True:
+#         client_socket, addr = server_socket.accept()
+#         print(f"{addr}에서 수신 소켓 연결됨")
+#         while True:
+#             data = client_socket.recv(128)
+#             if not data:
+#                 print("텍스트 데이터 없음")
+#                 break
+#             received_data += data
+#             start_index = received_data.find(b'[')
+#             end_index = received_data.find(b']')
+#             while start_index != -1 and end_index != -1:
+#                 data_chunk = received_data[start_index+1:end_index].decode('utf-8')
+#                 received_data = received_data[end_index + 1:]
+#                 count = 0
+#                 for i in data_chunk.split(', '):
+#                     try:
+#                         int(i)
+#                         with receive_lock:
+#                             receive_sensor[count] = int(i)
+#                     except: pass
+#                     count+=1
+#                 start_index = received_data.find(b'[')
+#                 end_index = received_data.find(b']')
+#         client_socket.close()
+
 def receive_socket_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, receive_socket_port))
@@ -100,7 +132,6 @@ def receive_socket_server():
                 start_index = received_data.find(b'[')
                 end_index = received_data.find(b']')
         client_socket.close()
-
 # 텍스트를 받아서 전역 변수에 저장하는 함수
 def set_text_to_send(text):
     global global_send
@@ -203,99 +234,32 @@ def set_angle(servo, angle):
         else:
             pass
         set_text_to_send(str(servo_state))
-foot = 10
-leg = 20
-hadn = 10
-arm = 45
-angle_time = 0.25
-def move_left():
-#    왼발 들기
-    set_angle("left_foot", foot*2)
-    set_angle("right_foot", foot*1.5)
-    time.sleep(angle_time)
-    
-#    왼발 돌리기
-    set_angle("right_leg", leg)
-    time.sleep(angle_time)
-    
-#     왼발 내리기
-    set_angle("right_foot", foot)
-    set_angle("left_foot", foot)
-    time.sleep(angle_time)
-    set_angle("right_foot", 0)
-    set_angle("left_foot", 0)
-    time.sleep(angle_time)
-
-#    오른발 들기
-    set_angle("right_foot", -foot*2)
-    set_angle("left_foot", -foot*1.5)
-    time.sleep(angle_time)
-    
-#     오른발 돌리기
-    set_angle("right_leg", 0)
-    time.sleep(angle_time)
-
-#    오른발 내리기
-    set_angle("left_foot", -foot)
-    set_angle("right_foot", -foot)
-    time.sleep(angle_time)
-    set_angle("left_foot", 0)
-    set_angle("right_foot", 0)
-    time.sleep(angle_time)
-
-def move_right():
-    #    오른발 들기
-    set_angle("right_foot", -foot*2)
-    set_angle("left_foot", -foot*1.5)
-    time.sleep(angle_time)
-    
-#     오른발 돌리기
-    set_angle("right_leg", leg)
-    time.sleep(angle_time)
-
-#    오른발 내리기
-    set_angle("left_foot", -foot)
-    set_angle("right_foot", -foot)
-    time.sleep(angle_time)
-    set_angle("left_foot", 0)
-    set_angle("right_foot", 0)
-    time.sleep(angle_time)
-    
-#    왼발 들기
-    set_angle("left_foot", foot*2)
-    set_angle("right_foot", foot*1.5)
-    time.sleep(angle_time)
-    
-#    왼발 돌리기
-    set_angle("right_leg", 0)
-    time.sleep(angle_time)
-    
-#     왼발 내리기
-    set_angle("right_foot", foot)
-    set_angle("left_foot", foot)
-    time.sleep(angle_time)
-    set_angle("right_foot", 0)
-    set_angle("left_foot", 0)
-    time.sleep(angle_time)
-
 
 tr_a = Tracking_Action()
 def tracking():
     global img
-    move_action(tr_a.tracking(img)) # action 리턴
-
-def move_action(action):
-    if action == 1:
-        move_right
-    elif action == 2:
-        move_left
-    else:
-        pass
+    return tr_a.tracking(img) # action 리턴
 
 def main():
-    while True:  
-        #tracking()
-        time.sleep(10)
+    global servo_state
+    action_message = ""
+    while True:
+        sw = False
+        action = tracking()
+        if action == 1:
+            sw = True
+            action_message = "[right]"
+        elif action == 2:
+            sw = True
+            action_message = "[left]"
+        else:
+            pass
+        while sw:
+            set_text_to_send(action_message)
+
+        print(action)
+        time.sleep(1)
+        
 
 # Flask 앱 라우트
 @app.route('/')
@@ -335,11 +299,11 @@ def handle_custom_data(message):
 if __name__ == '__main__':
     # 각각의 소켓 서버를 다른 스레드에서 실행
     image_thread = threading.Thread(target=image_socket_server)
-    receive_thread = threading.Thread(target=receive_socket_server)
+    #receive_thread = threading.Thread(target=receive_socket_server) 센서 정보 off
     send_thread = threading.Thread(target=send_socket_server)
     main = threading.Thread(target=main)
     image_thread.start()
-    receive_thread.start()
+    #receive_thread.start()
     send_thread.start()
     main.start()
     # Flask 앱을 SocketIO 서버로 실행

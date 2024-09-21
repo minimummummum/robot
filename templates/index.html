@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Video Feed</title>
+  </head>
+  <body>
+    <img id="videoImage" width="640" height="480" />
+    <!-- Socket.IO 및 클라이언트 측 JavaScript 코드 추가 -->
+    <button onclick="sendDataToServer()">Send Data to Server</button>
+    <button onclick="sendDataToServer2()">Send Data to Server(balance)</button>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
+    <script type="text/javascript">
+        // 네임스페이스를 '/video_feed'로 설정
+        var socket = io.connect('http://' + document.domain + ':' + location.port + '/video_feed');
+           
+        socket.on('image_data', function(msg) {
+            // 여기에서 이미지 데이터를 처리하고 HTML에 표시하는 코드를 추가
+            console.log(msg.data);
+            var videoImage = document.getElementById('videoImage');
+            videoImage.src = 'data:image/jpeg;base64,' + msg.data;
+        });
+
+        // 서버로 데이터를 보내는 함수
+        function sendDataToServer() {
+            // 여기에서 서버로 보낼 데이터를 만듭니다.
+            var dataToSend = "앞으로 나란히";
+            
+            // Socket.IO를 사용하여 데이터를 서버로 전송합니다.
+            socket.emit('message', { event_type: 'custom_data', data: dataToSend });
+        }
+        function sendDataToServer2() {
+            var dataToSend = "balance";
+            socket.emit('message', { event_type: 'custom_data', data: dataToSend });
+        }
+    </script>
+  </body>
+</html>

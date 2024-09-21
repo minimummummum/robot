@@ -28,8 +28,8 @@ class Tracking_Action():
                     position = "Left"
                 else:
                     position = "None"
-                cv2.putText(img, f'Position: {position}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-            cv2.imshow('Pose Detection', img)
+                #cv2.putText(img, f'Position: {position}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            #cv2.imshow('Pose Detection', img)
             return action
         except Exception as e:
             #print("tracking_action.py error")
