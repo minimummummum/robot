@@ -299,7 +299,6 @@ def ranking(score, name, img):
     with open("data/ranker.json", "w", encoding="utf-8") as f:
         json.dump(ranker, f, ensure_ascii=False, indent=4)
 
-# Flask 앱 라우트
 @app.route('/')
 def index():
     audio_url = '/static/audio/example.mp3'
@@ -307,8 +306,6 @@ def index():
 
 @socketio.on('connect', namespace='/video_feed')
 def handle_connect():
-    print("Client connected")
-    # 클라이언트가 접속하면 현재 랭킹을 보내줌
     socketio.emit('ranking', {'data': ranker}, namespace='/video_feed')
     
 # html에서 message 받기
@@ -327,13 +324,11 @@ def handle_custom_data(message):
         print(message.get('data2'))
         game(message.get('data2'))
 if __name__ == '__main__':
-    # 각각의 소켓 서버를 다른 스레드에서 실행
     image_thread = threading.Thread(target=image_socket_server)
     send_thread = threading.Thread(target=send_socket_server)
     main = threading.Thread(target=main)
     image_thread.start()
     send_thread.start()
     main.start()
-    # Flask 앱을 SocketIO 서버로 실행
     socketio.run(app, host=host, port=flask_port, debug=False)
 
