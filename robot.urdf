@@ -1,0 +1,1750 @@
+<?xml version="1.0" ?>
+<robot name="robot">
+
+<material name="silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0013701657974682124 0.001576690193939907 0.20915638797154532" rpy="0 0 0"/>
+    <mass value="0.14165248638936148"/>
+    <inertia ixx="4.773281688916827e-05" iyy="0.00011970912409957606" izz="0.00011571187682261842" ixy="-4.293557070072845e-18" iyz="7.318364664277155e-19" ixz="-2.1772134876224536e-16"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="camera1">
+  <inertial>
+    <origin xyz="-0.006999834202576712 0.004491951311822999 0.0017403620449260027" rpy="0 0 0"/>
+    <mass value="0.017213034736494746"/>
+    <inertia ixx="1.358276581521164e-06" iyy="1.3545110688692593e-06" izz="7.099517221006004e-07" ixy="4.622682309640344e-19" iyz="-2.432662866077315e-07" ixz="-1.2976544751935881e-18"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.00837 -0.016077 -0.221871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/camera1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.00837 -0.016077 -0.221871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/camera1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="connection1">
+  <inertial>
+    <origin xyz="-0.009713377906085507 -3.098060402423504e-07 -0.010286139285751617" rpy="0 0 0"/>
+    <mass value="0.020548069245269533"/>
+    <inertia ixx="3.5713234489500884e-06" iyy="3.836775691427874e-06" izz="2.404942580693882e-06" ixy="1.642079247370868e-18" iyz="5.499784926522172e-18" ixz="-1.0087549666986284e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.03637 -0.001577 -0.192871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/connection1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.03637 -0.001577 -0.192871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/connection1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="connection2">
+  <inertial>
+    <origin xyz="-0.06870929049914766 0.058129690193920676 -0.19634313928575126" rpy="0 0 0"/>
+    <mass value="0.020548069245269533"/>
+    <inertia ixx="3.5713234489498716e-06" iyy="3.836775691427549e-06" izz="2.40494258069323e-06" ixy="1.6534083130403943e-18" iyz="-5.4447277849506426e-18" ixz="1.008754966699157e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.044793 0.056553 -0.378928" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/connection2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.044793 0.056553 -0.378928" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/connection2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bracket11">
+  <inertial>
+    <origin xyz="0.014403656438291258 -0.010160309805984794 -0.007486470178516336" rpy="0 0 0"/>
+    <mass value="0.04491839260137373"/>
+    <inertia ixx="1.4471951462612315e-05" iyy="9.956231389530567e-06" izz="1.9175693401914722e-05" ixy="-1.3494928915655513e-17" iyz="1.0083080204115191e-17" ixz="1.2141799296271657e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.02237 -0.001577 -0.168871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.02237 -0.001577 -0.168871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bracket21">
+  <inertial>
+    <origin xyz="0.06022667515647532 0.0007636901938649059 -0.15035847017851564" rpy="0 0 0"/>
+    <mass value="0.04491839260137373"/>
+    <inertia ixx="1.4471951462612315e-05" iyy="9.956231389530784e-06" izz="1.9175693401914763e-05" ixy="-1.3503399245128056e-17" iyz="-9.947554932554503e-18" ixz="-1.214179929626461e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.09426 0.009347 -0.311743" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.09426 0.009347 -0.311743" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servo11">
+  <inertial>
+    <origin xyz="-0.007913317491596072 -0.02382570023053155 -0.004999682810447603" rpy="0 0 0"/>
+    <mass value="0.24700661936155432"/>
+    <inertia ixx="4.351485441173378e-05" iyy="3.82657559888748e-05" izz="6.541208567746983e-05" ixy="-8.110467535674782e-07" iyz="4.336808689942018e-19" ixz="1.474514954580286e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.05537 -0.015417 -0.173871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.05537 -0.015417 -0.173871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servo21">
+  <inertial>
+    <origin xyz="0.007913649086362898 -0.02382570023053196 -0.004999682810440803" rpy="0 0 0"/>
+    <mass value="0.24700661936155432"/>
+    <inertia ixx="4.351485441173638e-05" iyy="3.8265755988873065e-05" izz="6.541208567747015e-05" ixy="8.110467535598617e-07" iyz="3.7947076036992655e-19" ixz="1.474514954580286e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.05263 -0.015417 -0.173871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.05263 -0.015417 -0.173871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="geer11">
+  <inertial>
+    <origin xyz="0.001012184629048854 -2.259071811684752e-07 3.17149589007526e-07" rpy="0 0 0"/>
+    <mass value="0.006118395420730019"/>
+    <inertia ixx="2.885791940612369e-07" iyy="1.502825918659541e-07" izz="1.5028259089887286e-07" ixy="-3.1212317073373713e-17" iyz="2.866761834158498e-17" ixz="5.735429492448318e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.070227 -0.001593 -0.168871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.070227 -0.001593 -0.168871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="shoulder1">
+  <inertial>
+    <origin xyz="0.011322537331950877 0.00024500436696702974 -0.0082885622390525" rpy="0 0 0"/>
+    <mass value="0.04640591354591769"/>
+    <inertia ixx="3.0158565719618034e-05" iyy="1.2322813661878483e-05" izz="3.1446065876846265e-05" ixy="-1.3599423589060729e-07" iyz="-5.662579714272647e-07" ixz="4.596676968548542e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.072727 -0.001593 -0.168871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/shoulder1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.072727 -0.001593 -0.168871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/shoulder1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="geer21">
+  <inertial>
+    <origin xyz="-0.0010118530342822507 -2.2590837307052102e-07 3.172301392684318e-07" rpy="0 0 0"/>
+    <mass value="0.006118395420730019"/>
+    <inertia ixx="2.8857919406047794e-07" iyy="1.5028259186676725e-07" izz="1.5028259089804277e-07" ixy="2.94744172238447e-17" iyz="-3.282252670610414e-20" ixz="5.823520918962766e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.067487 -0.001593 -0.168871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.067487 -0.001593 -0.168871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="shoulder2">
+  <inertial>
+    <origin xyz="0.1575487942628156 -0.01659322898104576 0.03169381092909043" rpy="0 0 0"/>
+    <mass value="0.04640591354591769"/>
+    <inertia ixx="3.0158565719609577e-05" iyy="1.2306060892459383e-05" izz="3.146281864626992e-05" ixy="-1.1346995332610897e-12" iyz="-7.939690791896334e-13" ixz="-4.598688246160881e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.238858 -0.018186 -0.128885" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/shoulder2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.238858 -0.018186 -0.128885" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/shoulder2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="geer31">
+  <inertial>
+    <origin xyz="-2.343668628612683e-08 -0.0014872206682448944 -4.40889649742926e-05" rpy="0 0 0"/>
+    <mass value="0.006118395420730019"/>
+    <inertia ixx="1.502825908979513e-07" iyy="2.8845825201200123e-07" izz="1.5040353391640947e-07" ixy="5.819455160815945e-17" iyz="4.087939278033556e-09" ixz="1.7753810574450135e-18"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.104727 -0.028306 -0.145151" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.104727 -0.028306 -0.145151" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servo31">
+  <inertial>
+    <origin xyz="-2.3396106288431362e-08 -0.02246455636594554 -0.010670488861434874" rpy="0 0 0"/>
+    <mass value="0.24700661936155432"/>
+    <inertia ixx="6.541208567746679e-05" iyy="4.3558211826113906e-05" izz="3.82223985746148e-05" ixy="8.483881999699072e-18" iyz="-6.544689725912679e-07" ixz="7.37257477290143e-18"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.104727 -0.025807 -0.145077" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.104727 -0.025807 -0.145077" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bracket31">
+  <inertial>
+    <origin xyz="0.0024867639719687723 -0.017878746615918997 -0.024539942127773273" rpy="0 0 0"/>
+    <mass value="0.04491839260137373"/>
+    <inertia ixx="1.917569340190357e-05" iyy="1.4468002410790003e-05" izz="9.960180441345072e-06" ixy="-1.213648905988415e-06" iyz="1.3348115063672154e-07" ixz="-3.5905911806625133e-08"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.109727 -0.010548 -0.158456" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.109727 -0.010548 -0.158456" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lbolt11">
+  <inertial>
+    <origin xyz="7.984727779936085e-07 -0.003763245905150793 -0.00011191151929032528" rpy="0 0 0"/>
+    <mass value="0.0005719338031033318"/>
+    <inertia ixx="6.1499699829141105e-09" iyy="1.1035193324075287e-09" izz="6.145799218792468e-09" ixy="-2.731998885050559e-12" iyz="-1.4860934736550644e-10" ixz="1.2785458862419816e-13"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.104727 0.019968 -0.143707" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.104727 0.019968 -0.143707" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="washers11">
+  <inertial>
+    <origin xyz="-2.3396262566199866e-08 -0.00027222059424134026 -8.027903689727944e-06" rpy="0 0 0"/>
+    <mass value="0.001753136877683194"/>
+    <inertia ixx="1.2790252015429458e-08" iyy="2.1242348928840016e-08" izz="1.2797650699084939e-08" ixy="3.9048218868423246e-19" iyz="2.5005602351015077e-10" ixz="1.6940658945086007e-20"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.104727 0.02567 -0.143554" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.104727 0.02567 -0.143554" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers11.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="connection3">
+  <inertial>
+    <origin xyz="-0.0007144793201071253 -0.18042182509545407 0.08615346557426815" rpy="0 0 0"/>
+    <mass value="0.020548069245269533"/>
+    <inertia ixx="3.5713234489500342e-06" iyy="3.835523536054237e-06" izz="2.4061947360619557e-06" ixy="2.9831053858648315e-08" iyz="4.232386596290797e-08" ixz="-1.0083137860139786e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.115155 -0.184399 -0.023873" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/connection3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.115155 -0.184399 -0.023873" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/connection3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hand1">
+  <inertial>
+    <origin xyz="0.046629976976433236 -0.014771346778488532 0.1299019504597067" rpy="0 0 0"/>
+    <mass value="0.04880806924526924"/>
+    <inertia ixx="3.4702615753875196e-05" iyy="1.1123979702701704e-05" izz="2.876175752851678e-05" ixy="-8.334804200982315e-19" iyz="-5.222723733511982e-07" ixz="2.0057740190981832e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.058097 -0.019425 0.042741" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/hand1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.058097 -0.019425 0.042741" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/hand1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="geer41">
+  <inertial>
+    <origin xyz="-0.12472664504971388 0.07618398293097349 -0.13061268279017413" rpy="0 0 0"/>
+    <mass value="0.006118395420730019"/>
+    <inertia ixx="1.5028259089784287e-07" iyy="2.8857919406218555e-07" izz="1.5028259186744487e-07" ixy="5.821488039889355e-17" iyz="-2.949368722339474e-17" ixz="4.0657581468206416e-20"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.02274 0.050079 -0.274984" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.02274 0.050079 -0.274984" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servo41">
+  <inertial>
+    <origin xyz="3.549908662164869e-07 -0.022770519189672052 -0.010001157112332959" rpy="0 0 0"/>
+    <mass value="0.24700661936155432"/>
+    <inertia ixx="6.541208567746853e-05" iyy="4.351485441181791e-05" izz="3.8265755988907326e-05" ixy="8.646512325571898e-18" iyz="-8.110467535654047e-07" ixz="6.071532165918825e-18"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.101987 -0.025093 -0.144371" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.101987 -0.025093 -0.144371" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bracket41">
+  <inertial>
+    <origin xyz="-0.0024864323772015445 -0.018596545259784554 -0.02399976668778489" rpy="0 0 0"/>
+    <mass value="0.04491839260137373"/>
+    <inertia ixx="1.9175693401879716e-05" iyy="1.4471951462613616e-05" izz="9.956231389507257e-06" ixy="1.214179929626068e-06" iyz="-1.4799359654427136e-17" ixz="5.637851296924623e-18"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.106987 -0.010236 -0.158195" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.106987 -0.010236 -0.158195" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lbolt21">
+  <inertial>
+    <origin xyz="1.1765021017406951e-06 -0.003964642011537151 2.8816194125314e-08" rpy="0 0 0"/>
+    <mass value="0.0005719338031033318"/>
+    <inertia ixx="6.1499699829124164e-09" iyy="1.0991433151858745e-09" izz="6.150175236007346e-09" ixy="-2.7270231323034487e-12" iyz="6.964205111843671e-13" ixz="2.0858975252624219e-13"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.101987 0.020703 -0.144355" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.101987 0.020703 -0.144355" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="washers21">
+  <inertial>
+    <origin xyz="-0.12472664500928997 -0.030577103038707115 -0.1322096828104447" rpy="0 0 0"/>
+    <mass value="0.001753136877683194"/>
+    <inertia ixx="1.2790252015429458e-08" iyy="2.124974685873104e-08" izz="1.2790252769183749e-08" ixy="3.9132922163148676e-19" iyz="8.470329472543003e-22" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.02274 -0.003898 -0.276581" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.02274 -0.003898 -0.276581" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers21.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="connection4">
+  <inertial>
+    <origin xyz="0.0020508109148740378 -0.17775603590072814 0.09483568960863409" rpy="0 0 0"/>
+    <mass value="0.020548069245269533"/>
+    <inertia ixx="3.5713234489513353e-06" iyy="3.836775691451943e-06" izz="2.404942580696071e-06" ixy="-3.64986496971878e-18" iyz="-1.8228149024912543e-18" ixz="1.0087549666945085e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.113751 -0.179992 -0.015146" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/connection4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.113751 -0.179992 -0.015146" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/connection4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hand2">
+  <inertial>
+    <origin xyz="-0.04662964538164932 0.010922964099257856 0.13028216984694155" rpy="0 0 0"/>
+    <mass value="0.04880806924526924"/>
+    <inertia ixx="3.470261575387346e-05" iyy="1.110852822765933e-05" izz="2.8777209003567395e-05" ixy="-8.191486226306888e-17" iyz="3.8963515573697816e-20" ixz="1.962405932198763e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.055357 0.008687 0.043176" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/hand2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.055357 0.008687 0.043176" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/hand2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="body1">
+  <inertial>
+    <origin xyz="-0.03499983420270281 0.012714619233136496 -0.014499683182973233" rpy="0 0 0"/>
+    <mass value="0.14165248638936148"/>
+    <inertia ixx="4.7732816889168705e-05" iyy="0.00011571187682262504" izz="0.00011970912409958194" ixy="-2.206345068260897e-16" iyz="8.131516293641283e-20" ixz="1.4907779871675686e-18"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.03637 0.008583 -0.154871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/body1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.03637 0.008583 -0.154871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/body1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="geer51">
+  <inertial>
+    <origin xyz="1.6575679852304237e-07 -3.098263310647581e-07 -0.0014874751578223128" rpy="0 0 0"/>
+    <mass value="0.006118395420730019"/>
+    <inertia ixx="1.5028259089801905e-07" iyy="1.502825918667808e-07" izz="2.8857919406156044e-07" ixy="-5.082197683525802e-20" iyz="2.9491146124552975e-17" ixz="5.824876171678373e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.03637 0.008583 -0.125871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.03637 0.008583 -0.125871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servo51">
+  <inertial>
+    <origin xyz="-0.00012121475912479918 0.010000427915319762 -0.022769977278467565" rpy="0 0 0"/>
+    <mass value="0.24700661936155432"/>
+    <inertia ixx="6.540808732274006e-05" iyy="3.826975434361281e-05" izz="4.351485441177026e-05" ixy="3.294308253941821e-07" iyz="8.109870222482426e-07" ixz="-9.843079442229535e-09"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.03637 0.008583 -0.123371" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.03637 0.008583 -0.123371" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="geer61">
+  <inertial>
+    <origin xyz="1.6575679884917038e-07 -3.098263314325195e-07 -0.0014874751578212303" rpy="0 0 0"/>
+    <mass value="0.006118395420730019"/>
+    <inertia ixx="1.502825908980326e-07" iyy="1.5028259186679435e-07" izz="2.885791940614622e-07" ixy="-4.0657581468206416e-20" iyz="2.949029909160572e-17" ixz="5.824876171678373e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.03363 0.008583 -0.125871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.03363 0.008583 -0.125871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servo61">
+  <inertial>
+    <origin xyz="1.657973792423828e-07 0.010001164495827696 -0.022769977278467107" rpy="0 0 0"/>
+    <mass value="0.24700661936155432"/>
+    <inertia ixx="6.541208567746679e-05" iyy="3.8265755988884775e-05" izz="4.351485441182198e-05" ixy="-2.9493687223394738e-18" iyz="8.110467535637784e-07" ixz="1.5720931501039814e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.03363 0.008583 -0.123371" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.03363 0.008583 -0.123371" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bracket61">
+  <inertial>
+    <origin xyz="-0.0024866215706897607 0.02399977407128077 -0.01859700334857986" rpy="0 0 0"/>
+    <mass value="0.04491839260137373"/>
+    <inertia ixx="1.9175693401906658e-05" iyy="9.956231389524224e-06" izz="1.4471951462613386e-05" ixy="-1.0149148774001027e-17" iyz="1.3131551781283418e-17" ixz="1.2141799296271657e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.03863 0.022407 -0.108515" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.03863 0.022407 -0.108515" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bracket51">
+  <inertial>
+    <origin xyz="0.01219490211975073 0.024149886277384364 -0.018597003348579888" rpy="0 0 0"/>
+    <mass value="0.04491839260137373"/>
+    <inertia ixx="1.9174335476919034e-05" iyy="9.957589314517486e-06" izz="1.4471951462612667e-05" ixy="1.1188160664819929e-07" iyz="-1.4735611094533693e-08" ixz="-1.2140905086828295e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.031538 0.022467 -0.108515" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.031538 0.022467 -0.108515" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg2">
+  <inertial>
+    <origin xyz="0.009247165618562272 -0.033532224262608865 -0.17571186061225758" rpy="0 0 0"/>
+    <mass value="0.0645080651117032"/>
+    <inertia ixx="6.218973636208869e-05" iyy="2.7962826414962532e-05" izz="4.104544766075196e-05" ixy="-9.33430307874239e-19" iyz="2.658086248395579e-12" ixz="-3.3772897672923463e-17"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.042877 -0.038285 -0.23009" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/leg2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.042877 -0.038285 -0.23009" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/leg2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lbolt41">
+  <inertial>
+    <origin xyz="9.873086349657112e-07 -2.1432698396432748e-08 -0.003964100100332074" rpy="0 0 0"/>
+    <mass value="0.0005719338031033311"/>
+    <inertia ixx="6.149969982913687e-09" iyy="6.150175236297031e-09" izz="1.0991433156702715e-09" ixy="-2.0858982113591091e-13" iyz="-6.964204539567036e-13" ixz="-2.727023125527185e-12"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.03363 -0.004753 -0.077575" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.03363 -0.004753 -0.077575" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="washers41">
+  <inertial>
+    <origin xyz="-0.023707834381591394 -0.07775222592864425 -0.037786371099550825" rpy="0 0 0"/>
+    <mass value="0.0017531368776831922"/>
+    <inertia ixx="1.2790252015439622e-08" iyy="1.2790252770135814e-08" izz="2.1249746859924087e-08" ixy="-2.3605749448793283e-19" iyz="4.0234064994579266e-20" ixz="3.2441361879839703e-19"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.009922 -0.082505 -0.111029" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.009922 -0.082505 -0.111029" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers41.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg1">
+  <inertial>
+    <origin xyz="3.156893112199466e-07 -2.0642570427130413e-07 -0.021136860612257127" rpy="0 0 0"/>
+    <mass value="0.0645080651117032"/>
+    <inertia ixx="6.218469511604273e-05" iyy="2.7967867661002886e-05" izz="4.1045447660744016e-05" ixy="4.1535630502956365e-07" iyz="2.6578882493619605e-12" ixz="-3.2292636446829004e-14"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.036208 -0.004752 -0.075515" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/leg1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.036208 -0.004752 -0.075515" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/leg1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lbolt31">
+  <inertial>
+    <origin xyz="1.1348572703795412e-06 6.361517873240685e-09 -0.003964100100332102" rpy="0 0 0"/>
+    <mass value="0.000571933803103332"/>
+    <inertia ixx="6.149975075775515e-09" iyy="6.1501701434267325e-09" izz="1.0991433156114027e-09" ixy="-2.1101920216851737e-13" iyz="-7.29465043849518e-13" ixz="-2.718370344734287e-12"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.036208 -0.004752 -0.077575" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.036208 -0.004752 -0.077575" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="washers31">
+  <inertial>
+    <origin xyz="3.1570937650271524e-07 -2.0809161889196598e-07 -0.00027237109955073613" rpy="0 0 0"/>
+    <mass value="0.0017531368776831922"/>
+    <inertia ixx="1.2790252015554819e-08" iyy="1.279025277064234e-08" izz="2.124974685906943e-08" ixy="-9.385072116018444e-18" iyz="4.362219678359647e-20" ixz="3.1340219048409113e-19"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.036208 -0.004752 -0.073515" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.036208 -0.004752 -0.073515" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers31.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="geer71">
+  <inertial>
+    <origin xyz="1.7828982353418343e-05 -0.0014878053222732689 -4.939692195525536e-07" rpy="0 0 0"/>
+    <mass value="0.006118395420730019"/>
+    <inertia ixx="1.5030296045973879e-07" iyy="2.885588244998729e-07" izz="1.5028259186681638e-07" ixy="-1.678280749992095e-09" iyz="-2.9486487443343076e-17" ixz="3.9895251815677546e-19"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.035893 -0.03075 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer71.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.035893 -0.03075 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer71.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servo71">
+  <inertial>
+    <origin xyz="0.01027666111538287 -0.022647181881893685 0.00010309312284430619" rpy="0 0 0"/>
+    <mass value="0.24700661936155432"/>
+    <inertia ixx="3.824975706213154e-05" iyy="4.353376535971463e-05" izz="6.540917365631328e-05" ixy="7.470999210433885e-07" iyz="4.9874980018085446e-09" ixz="-2.8122569941817265e-07"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.035923 -0.02825 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo71.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.035923 -0.02825 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo71.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bracket71">
+  <inertial>
+    <origin xyz="0.024352436842426016 -0.018302361111654578 -0.012237484212325686" rpy="0 0 0"/>
+    <mass value="0.04491839260137373"/>
+    <inertia ixx="9.958190559341907e-06" iyy="1.447098127615788e-05" izz="1.9174704418547964e-05" ixy="-6.735972474332096e-08" iyz="1.2128665868181406e-06" ixz="-1.102103339691009e-07"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.022229 -0.013226 -0.025871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket71.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.022229 -0.013226 -0.025871" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket71.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lbolt51">
+  <inertial>
+    <origin xyz="4.8924660410738785e-05 -0.003964485817788535 -5.235591943528184e-07" rpy="0 0 0"/>
+    <mass value="0.0005719338031033302"/>
+    <inertia ixx="6.149288112370458e-09" iyy="1.099820887372321e-09" izz="6.150179534996438e-09" ixy="5.856032692907447e-11" iyz="6.705947730311754e-13" ixz="1.9829542463442238e-13"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.036495 0.017542 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.036495 0.017542 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="washers51">
+  <inertial>
+    <origin xyz="3.430741566286255e-06 -0.00027200305729025917 -4.93989490080865e-07" rpy="0 0 0"/>
+    <mass value="0.0017531368776831922"/>
+    <inertia ixx="1.2791498005649688e-08" iyy="2.1248500869016913e-08" izz="1.2790252770347149e-08" ixy="-1.0265912166253661e-10" iyz="-3.4622471719019526e-20" ixz="2.346281263894412e-19"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.036548 0.023246 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.036548 0.023246 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers51.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="foot1">
+  <inertial>
+    <origin xyz="0.02389836667431896 0.009306210785565417 -0.0007512942300409138" rpy="0 0 0"/>
+    <mass value="0.10122041855728602"/>
+    <inertia ixx="0.00012181184329396493" iyy="3.577570116424333e-05" izz="0.0001575124059665672" ixy="1.044388295312379e-06" iyz="-4.486601795975192e-09" ixz="-3.6965828081359664e-07"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.022535 -0.004229 -0.006872" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/foot1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.022535 -0.004229 -0.006872" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/foot1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="geer81">
+  <inertial>
+    <origin xyz="-0.023392834422014234 -0.07923801790349247 -0.03751449396922067" rpy="0 0 0"/>
+    <mass value="0.006118395420730019"/>
+    <inertia ixx="1.502825908979767e-07" iyy="2.885791940614859e-07" izz="1.5028259186697392e-07" ixy="5.82250447942606e-17" iyz="-2.9489452058658466e-17" ixz="4.1504614415460717e-20"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.010237 -0.108503 -0.058529" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer81.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.010237 -0.108503 -0.058529" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/geer81.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="servo81">
+  <inertial>
+    <origin xyz="-0.010001308683319186 -0.02277052002413787 -4.939894886063501e-07" rpy="0 0 0"/>
+    <mass value="0.24700661936155432"/>
+    <inertia ixx="3.826575598887598e-05" iyy="4.351485441180013e-05" izz="6.541208567746701e-05" ixy="-8.110467535678848e-07" iyz="-1.2268425208031286e-17" ixz="-3.0086610286472748e-18"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.03363 -0.028253 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo81.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.03363 -0.028253 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/servo81.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bracket81">
+  <inertial>
+    <origin xyz="-0.02399991825892268 -0.018596546094250578 -0.01248728135756394" rpy="0 0 0"/>
+    <mass value="0.04491839260137373"/>
+    <inertia ixx="9.95623138952843e-06" iyy="1.4471951462612844e-05" izz="1.9175693401921647e-05" ixy="1.2910476182050046e-17" iyz="1.214179929626904e-06" ixz="-9.90350921929728e-18"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.019806 -0.013396 -0.026015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket81.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.019806 -0.013396 -0.026015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/bracket81.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lbolt61">
+  <inertial>
+    <origin xyz="9.034312193345606e-07 -0.003964642846002512 -6.986642513487351e-07" rpy="0 0 0"/>
+    <mass value="0.0005719338031033323"/>
+    <inertia ixx="6.149969982914005e-09" iyy="1.0991433153380228e-09" izz="6.150175236689631e-09" ixy="-2.727023147655921e-12" iyz="6.964204542743409e-13" ixz="2.0858982113591091e-13"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.033646 0.017543 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.033646 0.017543 -0.021015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/lbolt61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="washers61">
+  <inertial>
+    <origin xyz="-0.02404783438159084 -0.07802610303870613 -0.03751449398949133" rpy="0 0 0"/>
+    <mass value="0.0017531368776831922"/>
+    <inertia ixx="1.2790252015440046e-08" iyy="2.1249746859160487e-08" izz="1.2790252771193334e-08" ixy="2.4754537883506927e-19" iyz="-3.7375328797596e-20" ixz="2.3335757696855974e-19"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.009582 -0.054507 -0.058529" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.009582 -0.054507 -0.058529" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/washers61.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="foot2">
+  <inertial>
+    <origin xyz="-0.022867918259005617 -0.05305954786805211 -0.0053954943620216494" rpy="0 0 0"/>
+    <mass value="0.10122041855728602"/>
+    <inertia ixx="0.00012182069009578843" iyy="3.5763025256122e-05" izz="0.00015751623507289207" ixy="8.086115327668453e-17" iyz="7.030373462210693e-19" ixz="6.437450399132683e-20"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.020938 -0.066471 -0.01141" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/foot2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.020938 -0.066471 -0.01141" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/foot2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Component531">
+  <inertial>
+    <origin xyz="8.174073347355648e-08 -3.673516009439215e-08 -0.0020004943620216594" rpy="0 0 0"/>
+    <mass value="0.0003945840372908583"/>
+    <inertia ixx="9.206961124918727e-10" iyy="9.206960105870329e-10" izz="7.891680239648338e-10" ixy="1.9852334701272664e-21" iyz="0.0" ixz="4.685150989500349e-21"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.067806 0.005604 -0.009015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component531.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.067806 0.005604 -0.009015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component531.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Component532">
+  <inertial>
+    <origin xyz="-0.09486791825926659 -0.06407503673515993 -0.004395494362021722" rpy="0 0 0"/>
+    <mass value="0.0003945840372908583"/>
+    <inertia ixx="9.206961124918859e-10" iyy="9.206960105876681e-10" izz="7.891680239650455e-10" ixy="1.9587636905255695e-21" iyz="0.0" ixz="4.791030107907136e-21"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.027062 -0.068471 -0.01141" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component532.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.027062 -0.068471 -0.01141" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component532.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Component533">
+  <inertial>
+    <origin xyz="0.001132081740734668 -0.06407503673515987 -0.0043954943620212825" rpy="0 0 0"/>
+    <mass value="0.0003945840372908583"/>
+    <inertia ixx="9.206961124918892e-10" iyy="9.206960105882505e-10" izz="7.891680239650455e-10" ixy="1.9587636905255695e-21" iyz="1.6543612251060553e-24" ixz="4.7380905487037425e-21"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.020938 -0.068471 -0.01141" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component533.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.020938 -0.068471 -0.01141" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component533.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Component534">
+  <inertial>
+    <origin xyz="0.001132081740734616 -0.07407503673516003 0.005604505637978809" rpy="0 0 0"/>
+    <mass value="0.0003945840372908583"/>
+    <inertia ixx="9.206961124919587e-10" iyy="9.206960104606397e-10" izz="7.891680238156236e-10" ixy="1.3234889800848443e-22" iyz="1.8065624578158124e-21" ixz="6.4123041085110705e-21"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.020938 -0.068471 -0.00141" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component534.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.020938 -0.068471 -0.00141" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component534.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Component535">
+  <inertial>
+    <origin xyz="0.09226636989962356 -0.0633144850429765 -0.003863775444581199" rpy="0 0 0"/>
+    <mass value="0.0003945840372908583"/>
+    <inertia ixx="9.206820053703245e-10" iyy="9.206960083961821e-10" izz="7.891821329985654e-10" ixy="-1.6998188364072335e-16" iyz="1.6531873284310283e-14" ixz="1.362087268868911e-12"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.021737 -0.068126 -0.011233" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component535.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.021737 -0.068126 -0.011233" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component535.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Component536">
+  <inertial>
+    <origin xyz="0.09240573256360639 -0.07331374857104656 0.006136224555418906" rpy="0 0 0"/>
+    <mass value="0.0003945840372908583"/>
+    <inertia ixx="9.206820053703311e-10" iyy="9.206960083961821e-10" izz="7.891821329989889e-10" ixy="-1.6998193658028255e-16" iyz="1.6531873277692838e-14" ixz="1.3620872687895017e-12"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.021755 -0.068126 -0.001233" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component536.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.021755 -0.068126 -0.001233" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component536.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Component537">
+  <inertial>
+    <origin xyz="-0.0035881579813087233 -0.07398225811238217 0.0057240797103511615" rpy="0 0 0"/>
+    <mass value="0.0003945840372908583"/>
+    <inertia ixx="9.206820053703179e-10" iyy="9.206960083991732e-10" izz="7.891821330008948e-10" ixy="-1.6998193658028255e-16" iyz="1.6531873284310283e-14" ixz="1.3620872687895017e-12"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.026245 -0.068212 -0.001148" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component537.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.026245 -0.068212 -0.001148" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component537.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Component538">
+  <inertial>
+    <origin xyz="-0.0037275206452914086 -0.06398299458431211 -0.004275920289648937" rpy="0 0 0"/>
+    <mass value="0.0003945840372908583"/>
+    <inertia ixx="9.206820053703278e-10" iyy="9.206960083986703e-10" izz="7.891821330008418e-10" ixy="-1.6998194319772745e-16" iyz="1.653187328100156e-14" ixz="1.3620872688027365e-12"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.026263 -0.068212 -0.011148" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component538.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.026263 -0.068212 -0.011148" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/Component538.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rigid_164" type="fixed">
+  <origin xyz="0.00837 0.016077 0.221871" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="camera1"/>
+</joint>
+
+<joint name="Rigid_165" type="fixed">
+  <origin xyz="0.03637 0.001577 0.192871" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="connection1"/>
+</joint>
+
+<joint name="Rigid_166" type="fixed">
+  <origin xyz="0.044793 -0.056553 0.378928" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="connection2"/>
+</joint>
+
+<joint name="Rigid_167" type="fixed">
+  <origin xyz="-0.014 0.0 -0.024" rpy="0 0 0"/>
+  <parent link="connection1"/>
+  <child link="bracket11"/>
+</joint>
+
+<joint name="Rigid_168" type="fixed">
+  <origin xyz="-0.139053 0.047206 -0.067185" rpy="0 0 0"/>
+  <parent link="connection2"/>
+  <child link="bracket21"/>
+</joint>
+
+<joint name="Rigid_169" type="fixed">
+  <origin xyz="0.033 0.01384 0.005" rpy="0 0 0"/>
+  <parent link="bracket11"/>
+  <child link="servo11"/>
+</joint>
+
+<joint name="Rigid_170" type="fixed">
+  <origin xyz="0.04163 0.024764 -0.137872" rpy="0 0 0"/>
+  <parent link="bracket21"/>
+  <child link="servo21"/>
+</joint>
+
+<joint name="Revolute_171" type="revolute">
+  <origin xyz="0.014857 -0.013824 -0.005" rpy="0 0 0"/>
+  <parent link="servo11"/>
+  <child link="geer11"/>
+  <axis xyz="1.0 0.0 -0.0"/>
+  <limit upper="3.316126" lower="-0.174533" effort="100" velocity="100"/>
+</joint>
+<transmission name="Revolute_171_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Revolute_171">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Revolute_171_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rigid_172" type="fixed">
+  <origin xyz="0.0025 0.0 0.0" rpy="0 0 0"/>
+  <parent link="geer11"/>
+  <child link="shoulder1"/>
+</joint>
+
+<joint name="Revolute_173" type="revolute">
+  <origin xyz="-0.014857 -0.013824 -0.005" rpy="0 0 0"/>
+  <parent link="servo21"/>
+  <child link="geer21"/>
+  <axis xyz="-1.0 -0.0 0.0"/>
+  <limit upper="0.174533" lower="-3.316126" effort="100" velocity="100"/>
+</joint>
+<transmission name="Revolute_173_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Revolute_173">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Revolute_173_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rigid_174" type="fixed">
+  <origin xyz="-0.171371 0.016593 -0.039986" rpy="0 0 0"/>
+  <parent link="geer21"/>
+  <child link="shoulder2"/>
+</joint>
+
+<joint name="Rigid_175" type="fixed">
+  <origin xyz="0.032 0.026713 -0.02372" rpy="0 0 0"/>
+  <parent link="shoulder1"/>
+  <child link="geer31"/>
+</joint>
+
+<joint name="Revolute_176" type="revolute">
+  <origin xyz="0.0 -0.002499 -7.4e-05" rpy="0 0 0"/>
+  <parent link="geer31"/>
+  <child link="servo31"/>
+  <axis xyz="-0.0 0.999563 0.029572"/>
+  <limit upper="0.959931" lower="-1.134464" effort="100" velocity="100"/>
+</joint>
+<transmission name="Revolute_176_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Revolute_176">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Revolute_176_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rigid_177" type="fixed">
+  <origin xyz="0.005 -0.015259 0.013379" rpy="0 0 0"/>
+  <parent link="servo31"/>
+  <child link="bracket31"/>
+</joint>
+
+<joint name="Rigid_178" type="fixed">
+  <origin xyz="-0.005 -0.030516 -0.014749" rpy="0 0 0"/>
+  <parent link="bracket31"/>
+  <child link="lbolt11"/>
+</joint>
+
+<joint name="Rigid_179" type="fixed">
+  <origin xyz="0.032 -0.027263 -0.025317" rpy="0 0 0"/>
+  <parent link="shoulder1"/>
+  <child link="washers11"/>
+</joint>
+
+<joint name="Rigid_180" type="fixed">
+  <origin xyz="0.005428 0.173851 -0.134583" rpy="0 0 0"/>
+  <parent link="bracket31"/>
+  <child link="connection3"/>
+</joint>
+
+<joint name="Rigid_181" type="fixed">
+  <origin xyz="-0.057058 -0.164974 -0.066614" rpy="0 0 0"/>
+  <parent link="connection3"/>
+  <child link="hand1"/>
+</joint>
+
+<joint name="Rigid_182" type="fixed">
+  <origin xyz="0.261598 -0.068265 0.146099" rpy="0 0 0"/>
+  <parent link="shoulder2"/>
+  <child link="geer41"/>
+</joint>
+
+<joint name="Revolute_183" type="revolute">
+  <origin xyz="-0.124727 0.075172 -0.130613" rpy="0 0 0"/>
+  <parent link="geer41"/>
+  <child link="servo41"/>
+  <axis xyz="-0.0 1.0 -0.0"/>
+  <limit upper="1.134464" lower="-0.959931" effort="100" velocity="100"/>
+</joint>
+<transmission name="Revolute_183_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Revolute_183">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Revolute_183_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rigid_184" type="fixed">
+  <origin xyz="-0.005 -0.014857 0.013824" rpy="0 0 0"/>
+  <parent link="servo41"/>
+  <child link="bracket41"/>
+</joint>
+
+<joint name="Rigid_185" type="fixed">
+  <origin xyz="0.005 -0.030939 -0.01384" rpy="0 0 0"/>
+  <parent link="bracket41"/>
+  <child link="lbolt21"/>
+</joint>
+
+<joint name="Rigid_186" type="fixed">
+  <origin xyz="0.261598 -0.014288 0.147696" rpy="0 0 0"/>
+  <parent link="shoulder2"/>
+  <child link="washers21"/>
+</joint>
+
+<joint name="Rigid_187" type="fixed">
+  <origin xyz="-0.006764 0.169756 -0.143049" rpy="0 0 0"/>
+  <parent link="bracket41"/>
+  <child link="connection4"/>
+</joint>
+
+<joint name="Rigid_188" type="fixed">
+  <origin xyz="0.058394 -0.188679 -0.058322" rpy="0 0 0"/>
+  <parent link="connection4"/>
+  <child link="hand2"/>
+</joint>
+
+<joint name="Rigid_189" type="fixed">
+  <origin xyz="0.014 -0.01016 -0.014" rpy="0 0 0"/>
+  <parent link="bracket11"/>
+  <child link="body1"/>
+</joint>
+
+<joint name="Rigid_190" type="fixed">
+  <origin xyz="0.0 0.0 -0.029" rpy="0 0 0"/>
+  <parent link="body1"/>
+  <child link="geer51"/>
+</joint>
+
+<joint name="Revolute_191" type="revolute">
+  <origin xyz="0.0 0.0 -0.0025" rpy="0 0 0"/>
+  <parent link="geer51"/>
+  <child link="servo51"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit upper="0.349066" lower="-0.349066" effort="100" velocity="100"/>
+</joint>
+<transmission name="Revolute_191_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Revolute_191">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Revolute_191_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rigid_192" type="fixed">
+  <origin xyz="-0.07 0.0 -0.029" rpy="0 0 0"/>
+  <parent link="body1"/>
+  <child link="geer61"/>
+</joint>
+
+<joint name="Revolute_193" type="revolute">
+  <origin xyz="0.0 0.0 -0.0025" rpy="0 0 0"/>
+  <parent link="geer61"/>
+  <child link="servo61"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit upper="0.349066" lower="-0.349066" effort="100" velocity="100"/>
+</joint>
+<transmission name="Revolute_193_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Revolute_193">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Revolute_193_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rigid_194" type="fixed">
+  <origin xyz="-0.005 -0.013824 -0.014856" rpy="0 0 0"/>
+  <parent link="servo61"/>
+  <child link="bracket61"/>
+</joint>
+
+<joint name="Rigid_195" type="fixed">
+  <origin xyz="-0.004832 -0.013884 -0.014856" rpy="0 0 0"/>
+  <parent link="servo51"/>
+  <child link="bracket51"/>
+</joint>
+
+<joint name="Rigid_196" type="fixed">
+  <origin xyz="-0.004247 0.060692 0.121575" rpy="0 0 0"/>
+  <parent link="bracket61"/>
+  <child link="leg2"/>
+</joint>
+
+<joint name="Rigid_197" type="fixed">
+  <origin xyz="0.005 0.02716 -0.03094" rpy="0 0 0"/>
+  <parent link="bracket61"/>
+  <child link="lbolt41"/>
+</joint>
+
+<joint name="Rigid_198" type="fixed">
+  <origin xyz="0.032955 0.04422 -0.119061" rpy="0 0 0"/>
+  <parent link="leg2"/>
+  <child link="washers41"/>
+</joint>
+
+<joint name="Rigid_199" type="fixed">
+  <origin xyz="0.00467 0.027219 -0.033" rpy="0 0 0"/>
+  <parent link="bracket51"/>
+  <child link="leg1"/>
+</joint>
+
+<joint name="Rigid_200" type="fixed">
+  <origin xyz="0.00467 0.027219 -0.03094" rpy="0 0 0"/>
+  <parent link="bracket51"/>
+  <child link="lbolt31"/>
+</joint>
+
+<joint name="Rigid_201" type="fixed">
+  <origin xyz="0.0 0.0 -0.002" rpy="0 0 0"/>
+  <parent link="leg1"/>
+  <child link="washers31"/>
+</joint>
+
+<joint name="Rigid_202" type="fixed">
+  <origin xyz="-0.000315 0.025998 -0.0545" rpy="0 0 0"/>
+  <parent link="leg1"/>
+  <child link="geer71"/>
+</joint>
+
+<joint name="Revolute_203" type="revolute">
+  <origin xyz="3e-05 -0.0025 0.0" rpy="0 0 0"/>
+  <parent link="geer71"/>
+  <child link="servo71"/>
+  <axis xyz="-0.012136 0.999926 -0.0"/>
+  <limit upper="1.570796" lower="-1.570796" effort="100" velocity="100"/>
+</joint>
+<transmission name="Revolute_203_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Revolute_203">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Revolute_203_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rigid_204" type="fixed">
+  <origin xyz="-0.013694 -0.015024 0.004856" rpy="0 0 0"/>
+  <parent link="servo71"/>
+  <child link="bracket71"/>
+</joint>
+
+<joint name="Rigid_205" type="fixed">
+  <origin xyz="0.014266 -0.030768 -0.004856" rpy="0 0 0"/>
+  <parent link="bracket71"/>
+  <child link="lbolt51"/>
+</joint>
+
+<joint name="Rigid_206" type="fixed">
+  <origin xyz="0.00034 -0.027998 -0.0545" rpy="0 0 0"/>
+  <parent link="leg1"/>
+  <child link="washers51"/>
+</joint>
+
+<joint name="Rigid_207" type="fixed">
+  <origin xyz="0.000306 -0.008997 -0.018999" rpy="0 0 0"/>
+  <parent link="bracket71"/>
+  <child link="foot1"/>
+</joint>
+
+<joint name="Rigid_208" type="fixed">
+  <origin xyz="0.03264 0.070218 -0.171561" rpy="0 0 0"/>
+  <parent link="leg2"/>
+  <child link="geer81"/>
+</joint>
+
+<joint name="Revolute_209" type="revolute">
+  <origin xyz="-0.023393 -0.08025 -0.037514" rpy="0 0 0"/>
+  <parent link="geer81"/>
+  <child link="servo81"/>
+  <axis xyz="-0.0 1.0 -0.0"/>
+  <limit upper="1.570796" lower="-1.570796" effort="100" velocity="100"/>
+</joint>
+<transmission name="Revolute_209_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Revolute_209">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Revolute_209_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="Rigid_210" type="fixed">
+  <origin xyz="0.013824 -0.014857 0.005" rpy="0 0 0"/>
+  <parent link="servo81"/>
+  <child link="bracket81"/>
+</joint>
+
+<joint name="Rigid_211" type="fixed">
+  <origin xyz="-0.01384 -0.030939 -0.005" rpy="0 0 0"/>
+  <parent link="bracket81"/>
+  <child link="lbolt61"/>
+</joint>
+
+<joint name="Rigid_212" type="fixed">
+  <origin xyz="0.033295 0.016222 -0.171561" rpy="0 0 0"/>
+  <parent link="leg2"/>
+  <child link="washers61"/>
+</joint>
+
+<joint name="Rigid_213" type="fixed">
+  <origin xyz="-0.001132 0.053075 -0.014605" rpy="0 0 0"/>
+  <parent link="bracket81"/>
+  <child link="foot2"/>
+</joint>
+
+<joint name="Rigid_214" type="fixed">
+  <origin xyz="-0.048 -0.019 -0.017" rpy="0 0 0"/>
+  <parent link="bracket81"/>
+  <child link="Component531"/>
+</joint>
+
+<joint name="Rigid_215" type="fixed">
+  <origin xyz="0.046868 0.055075 -0.014605" rpy="0 0 0"/>
+  <parent link="bracket81"/>
+  <child link="Component532"/>
+</joint>
+
+<joint name="Rigid_216" type="fixed">
+  <origin xyz="-0.001132 0.055075 -0.014605" rpy="0 0 0"/>
+  <parent link="bracket81"/>
+  <child link="Component533"/>
+</joint>
+
+<joint name="Rigid_217" type="fixed">
+  <origin xyz="-0.001132 0.055075 -0.024605" rpy="0 0 0"/>
+  <parent link="bracket81"/>
+  <child link="Component534"/>
+</joint>
+
+<joint name="Rigid_218" type="fixed">
+  <origin xyz="-0.043966 0.0549 -0.014638" rpy="0 0 0"/>
+  <parent link="bracket71"/>
+  <child link="Component535"/>
+</joint>
+
+<joint name="Rigid_219" type="fixed">
+  <origin xyz="-0.043984 0.0549 -0.024638" rpy="0 0 0"/>
+  <parent link="bracket71"/>
+  <child link="Component536"/>
+</joint>
+
+<joint name="Rigid_220" type="fixed">
+  <origin xyz="0.004016 0.054986 -0.024723" rpy="0 0 0"/>
+  <parent link="bracket71"/>
+  <child link="Component537"/>
+</joint>
+
+<joint name="Rigid_221" type="fixed">
+  <origin xyz="0.004034 0.054986 -0.014723" rpy="0 0 0"/>
+  <parent link="bracket71"/>
+  <child link="Component538"/>
+</joint>
+
+</robot>

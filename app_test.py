@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template
 from flask_socketio import SocketIO
 import time
 import socket
@@ -9,7 +9,11 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from tracking_action import Tracking_Action
+import random
+import math
+from robot_action import Robot_Action
+from simulation import Simulation
+import json
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -20,24 +24,29 @@ receive_socket_port = 8081
 send_socket_port = 8082
 flask_port = 5000
 global_send = None
-servo_state = [-90,-90,45,45,-5,0,0,0,0] # 오른어깨 왼어깨 오른손 왼손 오른다리 왼다리 오른발 왼발
-servo_default = [-90,-90,45,45,-5,0,0,0,0]
+servo_state = [-90,-90,45,45,0,0,0,0,0] # 오른어깨 왼어깨 오른손 왼손 오른다리 왼다리 오른발 왼발
+servo_default = [-90,-90,45,45,0,0,0,0,0]
 send_lock = threading.Lock()
-receive_lock = threading.Lock()
+#receive_lock = threading.Lock()
 servo_lock = threading.Lock()
 receive_sensor = [0,0,0,0,0,0]
 balance_sw = False
 img = []
+ranker = {}
+with open("data/ranker.json", "r", encoding="utf-8") as f:
+    ranker = json.load(f)
+
+encoded_data = 0
 # 이미지 데이터를 처리하는 소켓 서버 함수
 def image_socket_server():
     global img
+    global encoded_data
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, image_socket_port))
     server_socket.listen(1)
     marker_start = b'\xff\xd8'
     marker_end = b'\xff\xd9'
     value_command = b''
-    captureimg = None
     sw = 0
     while True:
         client_socket, addr = server_socket.accept()
@@ -101,37 +110,34 @@ def image_socket_server():
 #                 end_index = received_data.find(b']')
 #         client_socket.close()
 
-def receive_socket_server():
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind((host, receive_socket_port))
-    server_socket.listen(1)
-    global receive_sensor
-    received_data = b''
-    while True:
-        client_socket, addr = server_socket.accept()
-        print(f"{addr}에서 수신 소켓 연결됨")
-        while True:
-            data = client_socket.recv(128)
-            if not data:
-                print("텍스트 데이터 없음")
-                break
-            received_data += data
-            start_index = received_data.find(b'[')
-            end_index = received_data.find(b']')
-            while start_index != -1 and end_index != -1:
-                data_chunk = received_data[start_index+1:end_index].decode('utf-8')
-                received_data = received_data[end_index + 1:]
-                count = 0
-                for i in data_chunk.split(', '):
-                    try:
-                        int(i)
-                        with receive_lock:
-                            receive_sensor[count] = int(i)
-                    except: pass
-                    count+=1
-                start_index = received_data.find(b'[')
-                end_index = received_data.find(b']')
-        client_socket.close()
+# def receive_socket_server():
+#     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#     server_socket.bind((host, receive_socket_port))
+#     server_socket.listen(1)
+#     global receive_sensor
+#     global action_sw
+#     received_data = b''
+#     while True:
+#         client_socket, addr = server_socket.accept()
+#         print(f"{addr}에서 수신 소켓 연결됨")
+#         while True:
+#             data = client_socket.recv(128)
+#             if not data:
+#                 print("텍스트 데이터 없음")
+#                 break
+#             received_data += data
+#             start_index = received_data.find(b'[')
+#             end_index = received_data.find(b']')
+#             while start_index != -1 and end_index != -1:
+#                 data_chunk = received_data[start_index+1:end_index].decode('utf-8')
+#                 received_data = received_data[end_index + 1:]
+#                 print("받은 데이터: ", data_chunk)
+#                 start_index = received_data.find(b'[')
+#                 end_index = received_data.find(b']')
+#                 if data_chunk == "complete":
+#                     with action_lock:
+#                         action_sw = False
+#         client_socket.close()
 # 텍스트를 받아서 전역 변수에 저장하는 함수
 def set_text_to_send(text):
     global global_send
@@ -146,6 +152,7 @@ def send_socket_server():
     while True:
         client_socket, addr = server_socket.accept()
         print(f"{addr}에서 송신 소켓 연결됨")
+        set_text_to_send(str(servo_state))
         while True:
             with send_lock:
                 try:
@@ -156,120 +163,154 @@ def send_socket_server():
                     print(f"전송 실패: {e}")
                     break
         client_socket.close()
-def incline():
-    receive_sensor_average1 = 0
-    receive_sensor_average2 = 0
-    for i in range(10):
-        receive_sensor_average1 += receive_sensor[3]
-        time.sleep(0.05)
-        if i == 9: receive_sensor_average1 /= i+1
-    for i in range(10):
-        receive_sensor_average2 += receive_sensor[3]
-        time.sleep(0.05)
-        if i == 9: receive_sensor_average2 /= i+1
-    return receive_sensor_average2 - receive_sensor_average1
-def balance():
-    global servo_state
-    while balance_sw:
-        receive_sensor_average = 0
-        add6 = 3
-        add7= 3
-        state6_max = 15
-        state7_max = 15
-        average_cut = 5
-        for i in range(2):
-            receive_sensor_average += receive_sensor[3]
-            time.sleep(0.1)
-            if i == 1: receive_sensor_average /= i+1
-        #print("기울기 평균",receive_sensor_average)
-        with servo_lock:
-            if -average_cut<receive_sensor_average<average_cut:
-                pass 
-            elif -average_cut>=receive_sensor_average:
-                if servo_state[6] < 0:
-                    add6*=2
-                    state6_max*=2
-                servo_state[6] = min(servo_state[6]+add6, state6_max)
-                if servo_state[7] >= 0:
-                    add7*=2
-                    state7_max*=2
-                servo_state[7] = min(servo_state[7]+add7, state7_max)
-                set_text_to_send(str(servo_state))
-                print(servo_state)
-            elif receive_sensor_average>=average_cut:
-                if servo_state[6] <= 0:
-                    add6*=2
-                    state6_max*=2
-                servo_state[6] = max(servo_state[6]-add6, -state6_max)
-                if servo_state[7] > 0:
-                    add7*=2
-                    state7_max*=2
-                servo_state[7] = max(servo_state[7]-add7, -state7_max)
-                set_text_to_send(str(servo_state))
-                print(servo_state)
-            else:
-                pass
 
-            
-servo_state = [0,0,0,0,0,0,0,0] # 오른어깨 왼어깨 오른손 왼손 오른다리 왼다리 오른발 왼발
-def set_angle(servo, angle):
-    global servo_state
-    with servo_lock:
-        if servo == "right_arm":
-            servo_state[0] = angle
-        elif servo == "left_arm":
-            servo_state[1] = angle
-        elif servo == "right_hand":
-            servo_state[2] = angle
-        elif servo == "left_hand":
-            servo_state[3] = angle
-        elif servo == "right_leg":
-            servo_state[4] = angle
-        elif servo == "left_leg":
-            servo_state[5] = angle
-        elif servo == "right_foot":
-            servo_state[6] = angle
-        elif servo == "left_foot":
-            servo_state[7] = angle
-        else:
-            pass
-        set_text_to_send(str(servo_state))
-
-tr_a = Tracking_Action()
-def tracking():
+rb_a = Robot_Action()
+def action_select():
     global img
-    return tr_a.tracking(img) # action 리턴
-
+    data = [0, 0, 0, 0]
+    data[0] = servo_state[0] + 90
+    data[1] = servo_state[1] + 90
+    data[2] = servo_state[2] - 45
+    data[3] = servo_state[3] - 45
+    action = rb_a.action(img, data)
+    return action
 def main():
     global servo_state
+    action_sw = False
     action_message = ""
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((host, receive_socket_port))
+    server_socket.listen(1)
+    received_data = b''
+    client_socket, addr = server_socket.accept()
+    print(f"{addr}에서 수신 소켓 연결됨")
     while True:
-        sw = False
-        action = tracking()
+
+        action = action_select()
         if action == 1:
-            sw = True
+            action_sw = True
             action_message = "[right]"
         elif action == 2:
-            sw = True
+            action_sw = True
             action_message = "[left]"
+        elif action == "wait":
+            continue
+        elif action:
+            with servo_lock:
+                servo_state[0] = action[0] - 90
+                servo_state[1] = action[1] - 90
+                servo_state[2] = action[2] + 45
+                servo_state[3] = action[3] + 45
+                servo_state[0] = np.clip(servo_state[0], -90, 90)
+                servo_state[1] = np.clip(servo_state[1], -90, 90)
+                servo_state[2] = np.clip(servo_state[2], 30, 95)
+                servo_state[3] = np.clip(servo_state[3], 30, 95)
+                set_text_to_send(str(servo_state))
         else:
-            pass
-        while sw:
+            print(action)
+        if action_sw:
             set_text_to_send(action_message)
+        while action_sw:
+            data = client_socket.recv(128)
+            received_data = data
+            if b'[' in received_data and b']' in received_data:
+                start_index = received_data.find(b'[')
+                end_index = received_data.find(b']')
+                data_chunk = received_data[start_index+1:end_index].decode('utf-8')
+                if data_chunk == "complete":
+                    action_sw = False
 
-        print(action)
-        time.sleep(1)
-        
+simulation = Simulation()
+def game(name):
+    global servo_state
+    average = 0
+    set_time = 15
+    data = [random.choice(range(0, 181, 10)), random.choice(range(0, 181, 10)),
+            random.choice(range(-10, 51, 10)), random.choice(range(-10, 51, 10))]
+    if data[0] > 90:
+        data[0] -= abs(data[2])
+    else:
+        data[0] += abs(data[2])
+    if data[1] > 90:
+        data[1] -= abs(data[3])
+    else:
+        data[1] += abs(data[3])
+    simulation.simulation_run(data)
+    start_time = time.time()
+    last_count = None
+    socketio.emit('speak', {'data': "시작"}, namespace='/video_feed')
+    socketio.emit('play_audio', {'data': '/static/audio/example.mp3'}, namespace='/video_feed')
+    while True:
+        stop_time = int(time.time() - start_time)
+        if stop_time >= set_time:
+            break
+        count = str(set_time - stop_time)
+        #print(count)
+        if count != last_count:
+            last_count = count
+            socketio.emit('text', {'data': last_count}, namespace='/video_feed')
+        data2 = [servo_state[0]+90, servo_state[1]+90, servo_state[2]-45, servo_state[3]-45]
+        distance = [math.sqrt((a - b) ** 2) for a, b in zip(data, data2)]
+        match_rate = [(1 - distance[0] / 180) * 100,
+               (1 - distance[1] / 180) * 100,
+               (1 - distance[2] / 60) * 100,
+               (1 - distance[3] / 60) * 100]
+        average = int(sum(match_rate)/len(match_rate))
+        #print("일치율: ", average,"%", data, data2)
+        socketio.emit('match_rate', {'data': int(average)}, namespace='/video_feed')
+        time.sleep(0.1)
+    img = encoded_data
+    simulation.simulation_run([0, 0, 0, 0])
+    socketio.emit('match_rate', {'data': 0}, namespace='/video_feed')
+    ranking(average, name, img)
+
+
+def ranking(score, name, img):
+    global ranker
+    value = [score, name, img]
+    text = "랭킹 등극 실패!"
+    print(len(ranker))
+    if len(ranker) < 9:
+        rankkey = ""
+        i = 1
+        while True:
+            rankkey = "rank"+str(i)
+            if rankkey not in ranker:
+                ranker[rankkey] = value
+                break
+            i+=1
+        ranker = dict(sorted(ranker.items(), key=lambda item: item[1][0], reverse=True))
+        ranker_items = list(ranker.items())
+        key_index = next(index for index, (key, value) in enumerate(ranker_items) if key == rankkey)
+        text = f"랭킹 {key_index + 1}위 등극!"
+    else:
+        min_key = min(ranker, key=lambda k: ranker[k][0])
+        min_score = ranker[min_key][0]
+        if score > min_score:
+            ranker[min_key] = value
+            ranker = dict(sorted(ranker.items(), key=lambda item: item[1][0], reverse=True))
+            ranker_items = list(ranker.items())
+            min_index = next(index for index, (key, value) in enumerate(ranker_items) if key == min_key)
+            text = f"랭킹 {min_index + 1}위 등극!"
+    socketio.emit('text', {'data': text}, namespace='/video_feed')
+    socketio.emit('ranking', {'data': ranker}, namespace='/video_feed')
+    socketio.emit('speak', {'data': "종료, "+text}, namespace='/video_feed')
+    socketio.emit('stop_audio', {}, namespace='/video_feed')
+    with open("data/ranker.json", "w", encoding="utf-8") as f:
+        json.dump(ranker, f, ensure_ascii=False, indent=4)
 
 # Flask 앱 라우트
 @app.route('/')
 def index():
-    return render_template('index.html')
+    audio_url = '/static/audio/example.mp3'
+    return render_template('index.html', audio_url=audio_url)
 
-# Flask 앱의 비디오 피드 라우트
-@app.route('/video_feed')
-def video_feed():
-    return Response()
+@socketio.on('connect', namespace='/video_feed')
+def handle_connect():
+    print("Client connected")
+    # 클라이언트가 접속하면 현재 랭킹을 보내줌
+    socketio.emit('ranking', {'data': ranker}, namespace='/video_feed')
+    
 # html에서 message 받기
 @socketio.on('message', namespace='/video_feed')
 def handle_message(message):
@@ -278,33 +319,21 @@ def handle_message(message):
         handle_image_data(message)
     elif event_type == 'custom_data':
         handle_custom_data(message)
-# message 해석 후 서보모터 제어
+
 def handle_image_data(message):
     print(f"Received image data: {message}")
 def handle_custom_data(message):
-    global balance_sw
-    if message.get('data') == '앞으로 나란히':
-        print("앞으로 나란히!")
-        with servo_lock:
-            servo_state[0] = 0
-            servo_state[1] = 0
-            set_text_to_send(str(servo_state))
-    elif message.get('data') == 'balance':
-        if balance_sw: balance_sw = False
-        else:
-            balance_sw = True
-            balance()
-        
-    print(f"Received custom data: {message}")
+    if message.get('data') == 'Start':
+        print(message.get('data2'))
+        game(message.get('data2'))
 if __name__ == '__main__':
     # 각각의 소켓 서버를 다른 스레드에서 실행
     image_thread = threading.Thread(target=image_socket_server)
-    #receive_thread = threading.Thread(target=receive_socket_server) 센서 정보 off
     send_thread = threading.Thread(target=send_socket_server)
     main = threading.Thread(target=main)
     image_thread.start()
-    #receive_thread.start()
     send_thread.start()
     main.start()
     # Flask 앱을 SocketIO 서버로 실행
     socketio.run(app, host=host, port=flask_port, debug=False)
+

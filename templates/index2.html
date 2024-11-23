@@ -77,9 +77,10 @@
             border: none;
             border-radius: 5px;
             white-space: nowrap;
+            width: auto;
         }
         button:disabled {
-            background-color: #ccc;
+            background-color: #ccc; /* 비활성화된 버튼 색상 */
             cursor: not-allowed;
         }
         #submitButton:hover:not(:disabled),
@@ -116,19 +117,15 @@
             margin-top: 5px;
             box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
         }
-        .gallery-wrapper {
-            display: flex; /* 수평 배치 */
-            flex-direction: row;
-            width: max-content; /* 트랙들이 수평으로 이어지도록 */
-            animation: scroll 15s linear infinite;
-        }
         .gallery-track {
             display: flex;
-            gap: 10px; /* 각 아이템 간의 간격 */
+            width: max-content;
+            animation: scroll 10s linear infinite;
         }
         .gallery-item {
             width: 200px;
             height: 150px;
+            margin-right: 10px;
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -139,52 +136,52 @@
             object-fit: cover;
             border-radius: 10px;
         }
-
-        /* 트랙 애니메이션: 2개 트랙을 한 번에 움직이게 설정 */
         @keyframes scroll {
             0% {
-                transform: translateX(0); /* 시작 */
+                transform: translateX(0);
             }
             100% {
-                transform: translateX(-50%); /* 두 번째 트랙이 첫 번째 트랙 뒤에 이어지도록 */
+                transform: translateX(-50%); /* 두 번째 트랙이 자연스럽게 이어지도록 */
             }
         }
     </style>
 </head>
 <body>
+    <!-- Main Content -->
     <div class="container">
+        <!-- Streaming Video -->
         <div class="streaming">
             <img id="videoImage"/>
         </div>
+        <!-- Ranking Section -->
         <div class="ranking">
+            <!-- Score Display -->
             <h2 id="match_rateDisplay">일치율: 0%</h2>
+
+            <!-- Input Box -->
             <div class="input-box">
                 <input type="text" id="playerName" placeholder="이름" maxlength="9">
                 <button id="submitButton" disabled>확인</button>
             </div>
+
+            <!-- Game Start Button -->
             <div class="controls">
                 <button id="startButton" disabled>시작</button>
             </div>
+
+            <!-- Ranking List -->
             <h3 id="textDisplay"></h3>
             <ul id="rankingList"></ul>
         </div>
     </div>
 
+    <!-- Gallery Section -->
     <div class="gallery">
-        <div class="gallery-wrapper">
-            <!-- 첫 번째 트랙 (이미지들) -->
-            <div class="gallery-track">
-                <!-- 이미지 아이템들이 여기에 추가됩니다 -->
-            </div>
-            <!-- 두 번째 트랙 (이미지들) -->
-            <div class="gallery-track">
-                <!-- 이미지 아이템들이 여기에 추가됩니다 -->
-            </div>
+        <div class="gallery-track">
         </div>
     </div>
-
     <audio id="audioPlayer" controls style="display:none;">
-        <source id="audioSource" type="audio/mp3" src="{{ audio_url }}">
+        <source id="audioSource" type="audio/mp3" src="{{ audio_url }}"> <!-- Flask에서 전달된 audio_url을 사용 -->
         브라우저가 오디오 요소를 지원하지 않습니다.
     </audio>
 
@@ -193,14 +190,11 @@
         const audioPlayer = document.getElementById('audioPlayer');
         audioPlayer.volume = 0.3;
         var socket = io.connect('http://' + document.domain + ':' + location.port + '/video_feed');
-        
         socket.on('ranking', function(msg) {
             const rankingList = document.getElementById('rankingList');
-            const galleryWrapper = document.querySelector('.gallery-wrapper');
-            const galleryTracks = document.querySelectorAll('.gallery-track');
+            const galleryTrack = document.querySelector('.gallery-track');
             rankingList.innerHTML = '';
-            galleryTracks.forEach(track => track.innerHTML = '');
-            
+            galleryTrack.innerHTML = '';
             let rankIndex = 1;
             for (const [key, value] of Object.entries(msg.data)) {
                 const score = value[0];
@@ -214,15 +208,10 @@
                 const galleryItem = document.createElement('div');
                 galleryItem.classList.add('gallery-item');
                 const imgElement = document.createElement('img');
-                imgElement.src = imgUrl;
-                imgElement.alt = `${name}의 이미지`;
+                imgElement.src = imgUrl;  // 이미지 URL을 src 속성에 설정
+                imgElement.alt = `${name}의 이미지`; // 이미지 대체 텍스트
                 galleryItem.appendChild(imgElement);
-
-                // 첫 번째 트랙에 추가
-                galleryTracks[0].appendChild(galleryItem);
-                // 두 번째 트랙에 추가
-                galleryTracks[1].appendChild(galleryItem.cloneNode(true));
-
+                galleryTrack.appendChild(galleryItem);
                 rankIndex++;
             }
         });
@@ -241,6 +230,7 @@
             match_rateDisplay.innerHTML = `일치율: ${msg.data}%`;
         });
         socket.on('image_data', function(msg) {
+            console.log(msg.data);
             var videoImage = document.getElementById('videoImage');
             videoImage.src = 'data:image/jpeg;base64,' + msg.data;
         });

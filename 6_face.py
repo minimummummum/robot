@@ -10,7 +10,7 @@ cap = cv2.VideoCapture(0)
 
 while cap.isOpened():
     ret, frame = cap.read()
-    
+    frame = cv2.flip(frame, 1) 
     # 이미지를 RGB로 변환
     image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     

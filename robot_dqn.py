@@ -26,4 +26,5 @@ class TrackingDQN():
     def select_action(self, state):
         state = torch.tensor([state], dtype=torch.float32, device=self.device).unsqueeze(0)
         with torch.no_grad():
-            return self.policy_net(state).max(1)[1].unsqueeze(0)
+            return self.policy_net(state).max(1)[1].item()
+        
