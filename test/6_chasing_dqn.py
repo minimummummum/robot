@@ -152,7 +152,7 @@ def plot_durations(show_result=False):
     except Exception as e:
         print("plotting 오류")
 
-num_episodes = 100
+num_episodes = 10000
 num_try = 0
 for i_episode in range(num_episodes):
     num_try+=1

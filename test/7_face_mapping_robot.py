@@ -79,9 +79,9 @@ while cap.isOpened():
 
         
         # 화면에 각도 표시
-        cv2.putText(image, f'RS: {right_shoulder_angle} RE: {right_elbow_angle}', 
+        cv2.putText(image, f'LS: {right_shoulder_angle} LE: {right_elbow_angle}', 
                     (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
-        cv2.putText(image, f'LS: {left_shoulder_angle} LE: {left_elbow_angle}', 
+        cv2.putText(image, f'RS: {left_shoulder_angle} RE: {left_elbow_angle}', 
                     (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
     # 결과 화면 출력

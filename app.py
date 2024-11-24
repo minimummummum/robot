@@ -27,7 +27,6 @@ global_send = None
 servo_state = [-90,-90,45,45,0,0,0,0,0] # 오른어깨 왼어깨 오른손 왼손 오른다리 왼다리 오른발 왼발
 servo_default = [-90,-90,45,45,0,0,0,0,0]
 send_lock = threading.Lock()
-#receive_lock = threading.Lock()
 servo_lock = threading.Lock()
 receive_sensor = [0,0,0,0,0,0]
 balance_sw = False
@@ -37,7 +36,7 @@ with open("data/ranker.json", "r", encoding="utf-8") as f:
     ranker = json.load(f)
 
 encoded_data = 0
-# 이미지 데이터를 처리하는 소켓 서버 함수
+# 클라이언트에서 이미지를 받는 함수
 def image_socket_server():
     global img
     global encoded_data
@@ -70,80 +69,17 @@ def image_socket_server():
                     decoded_data = base64.b64decode(encoded_data)
                     nparr = np.frombuffer(decoded_data, np.uint8)
                     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-                    #cv2.imshow('img', img)
 
                     cv2.waitKey(1)
                     value_command = value_command[index_end+len(marker_end):]
                     sw = 0
         client_socket.close()
-
-# 센서 데이터를 받는 소켓 서버 함수 @@@off해놓음
-# def receive_socket_server():
-#     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#     server_socket.bind((host, receive_socket_port))
-#     server_socket.listen(1)
-#     global receive_sensor
-#     received_data = b''
-#     while True:
-#         client_socket, addr = server_socket.accept()
-#         print(f"{addr}에서 수신 소켓 연결됨")
-#         while True:
-#             data = client_socket.recv(128)
-#             if not data:
-#                 print("텍스트 데이터 없음")
-#                 break
-#             received_data += data
-#             start_index = received_data.find(b'[')
-#             end_index = received_data.find(b']')
-#             while start_index != -1 and end_index != -1:
-#                 data_chunk = received_data[start_index+1:end_index].decode('utf-8')
-#                 received_data = received_data[end_index + 1:]
-#                 count = 0
-#                 for i in data_chunk.split(', '):
-#                     try:
-#                         int(i)
-#                         with receive_lock:
-#                             receive_sensor[count] = int(i)
-#                     except: pass
-#                     count+=1
-#                 start_index = received_data.find(b'[')
-#                 end_index = received_data.find(b']')
-#         client_socket.close()
-
-# def receive_socket_server():
-#     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#     server_socket.bind((host, receive_socket_port))
-#     server_socket.listen(1)
-#     global receive_sensor
-#     global action_sw
-#     received_data = b''
-#     while True:
-#         client_socket, addr = server_socket.accept()
-#         print(f"{addr}에서 수신 소켓 연결됨")
-#         while True:
-#             data = client_socket.recv(128)
-#             if not data:
-#                 print("텍스트 데이터 없음")
-#                 break
-#             received_data += data
-#             start_index = received_data.find(b'[')
-#             end_index = received_data.find(b']')
-#             while start_index != -1 and end_index != -1:
-#                 data_chunk = received_data[start_index+1:end_index].decode('utf-8')
-#                 received_data = received_data[end_index + 1:]
-#                 print("받은 데이터: ", data_chunk)
-#                 start_index = received_data.find(b'[')
-#                 end_index = received_data.find(b']')
-#                 if data_chunk == "complete":
-#                     with action_lock:
-#                         action_sw = False
-#         client_socket.close()
 # 텍스트를 받아서 전역 변수에 저장하는 함수
 def set_text_to_send(text):
     global global_send
     with send_lock:
         global_send = text
-# 텍스트를 보내는 소켓 서버 함수
+# 텍스트를 클라이언트에 보내는 함수
 def send_socket_server():
     global global_send
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -163,7 +99,7 @@ def send_socket_server():
                     print(f"전송 실패: {e}")
                     break
         client_socket.close()
-
+# 학습 된 DQN을 이용하여 액션 선택
 rb_a = Robot_Action()
 def action_select():
     global img
@@ -174,6 +110,7 @@ def action_select():
     data[3] = servo_state[3] - 45
     action = rb_a.action(img, data)
     return action
+# main
 def main():
     global servo_state
     action_sw = False
@@ -185,7 +122,6 @@ def main():
     client_socket, addr = server_socket.accept()
     print(f"{addr}에서 수신 소켓 연결됨")
     while True:
-
         action = action_select()
         if action == 1:
             action_sw = True
@@ -219,7 +155,7 @@ def main():
                 data_chunk = received_data[start_index+1:end_index].decode('utf-8')
                 if data_chunk == "complete":
                     action_sw = False
-
+# 랭킹 모드
 simulation = Simulation()
 def game(name):
     global servo_state
@@ -245,7 +181,6 @@ def game(name):
         if stop_time >= set_time:
             break
         count = str(set_time - stop_time)
-        #print(count)
         if count != last_count:
             last_count = count
             socketio.emit('text', {'data': last_count}, namespace='/video_feed')
@@ -263,7 +198,6 @@ def game(name):
     simulation.simulation_run([0, 0, 0, 0])
     socketio.emit('match_rate', {'data': 0}, namespace='/video_feed')
     ranking(average, name, img)
-
 
 def ranking(score, name, img):
     global ranker

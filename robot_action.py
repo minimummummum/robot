@@ -14,7 +14,6 @@ class Robot_Action():
     def action(self, img, servo_state):
         try:
             self.servo_state = servo_state
-            # 이미지 크기 축소 (성능 최적화)
             img_resized = cv2.resize(img, (320, 240))
             img_rgb = cv2.cvtColor(img_resized, cv2.COLOR_BGR2RGB)
             
@@ -23,7 +22,6 @@ class Robot_Action():
             img = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)
             
             if results.pose_landmarks:
-                # 사람의 주요 랜드마크만 가져오기
                 landmarks = results.pose_landmarks.landmark
                 left_shoulder = [landmarks[self.mp_pose.PoseLandmark.LEFT_SHOULDER].x,
                                  landmarks[self.mp_pose.PoseLandmark.LEFT_SHOULDER].y]
@@ -73,5 +71,4 @@ class Robot_Action():
                 self.arm_length = 0
                 return "wait"
         except Exception as e:
-            # 예외 처리
             pass
