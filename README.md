@@ -1,1 +1,1 @@
-[문성민_졸업작품설명서_201801352.pptx](https://github.com/user-attachments/files/17893038/_._201801352.pptx)
+![설명서](https://github.com/user-attachments/assets/c341495a-88f5-431c-8476-a02036964f6c)
