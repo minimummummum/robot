@@ -23,6 +23,7 @@ class Robot_Action():
             
             if results.pose_landmarks:
                 landmarks = results.pose_landmarks.landmark
+                
                 left_shoulder = [landmarks[self.mp_pose.PoseLandmark.LEFT_SHOULDER].x,
                                  landmarks[self.mp_pose.PoseLandmark.LEFT_SHOULDER].y]
                 left_elbow = [landmarks[self.mp_pose.PoseLandmark.LEFT_ELBOW].x,
@@ -34,7 +35,11 @@ class Robot_Action():
 
                 # 코 위치에 따른 동작 결정
                 nose_landmark = landmarks[self.mp_pose.PoseLandmark.NOSE]
-                if nose_landmark.x < 0.3: 
+                # 화면 너무 끝이거나, 없을 때 -값 나와서 제한 걸어둠.
+                if nose_landmark.x < 0.09 or nose_landmark.x > 0.91:
+                    self.arm_length = 0
+                    return "wait"
+                if nose_landmark.x < 0.3:
                     action = self.tr.select_action(-0.1)
                 elif nose_landmark.x > 0.7:
                     action = self.tr.select_action(0.1)

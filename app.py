@@ -64,11 +64,15 @@ def image_socket_server():
                 index_end = value_command.find(marker_end)
                 if index_end != -1:
                     encoded_data = base64.b64encode(value_command[index_start:index_end] + marker_end).decode('utf-8')
-                    socketio.emit('image_data', {'data': encoded_data}, namespace='/video_feed')
-
                     decoded_data = base64.b64decode(encoded_data)
                     nparr = np.frombuffer(decoded_data, np.uint8)
                     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+                    flip_img = cv2.flip(img, 1)
+                    _, buffer = cv2.imencode('.jpg', flip_img)
+                    flip_img_base64 = base64.b64encode(buffer).decode('utf-8')
+                    socketio.emit('image_data', {'data': flip_img_base64}, namespace='/video_feed')
+
+                    
 
                     cv2.waitKey(1)
                     value_command = value_command[index_end+len(marker_end):]
@@ -130,6 +134,8 @@ def main():
             action_sw = True
             action_message = "[left]"
         elif action == "wait":
+            with servo_lock:
+                set_text_to_send(str(servo_default))
             continue
         elif action:
             with servo_lock:
