@@ -35,7 +35,7 @@ class Robot_Action():
 
                 # 코 위치에 따른 동작 결정
                 nose_landmark = landmarks[self.mp_pose.PoseLandmark.NOSE]
-                # 화면 너무 끝이거나, 없을 때 -값 나와서 제한 걸어둠.
+                # 화면 너무 끝이거나, 없을 때도 값 나와서 제한 걸어둠.
                 if nose_landmark.x < 0.09 or nose_landmark.x > 0.91:
                     self.arm_length = 0
                     return "wait"
